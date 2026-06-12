@@ -45,18 +45,18 @@ st.markdown("""
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: #ffffff;
-        color: #2c3e50;
+        background-color: #0e1117;
+        color: #fafafa;
         text-align: center;
-        padding: 10px;
+        padding: 12px 10px;
         font-size: 14px;
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid #262730;
         z-index: 1000;
     }
     .footer a {
         color: #4a90e2;
         text-decoration: none;
-        margin: 0 10px;
+        margin: 0 12px;
         font-weight: 600;
     }
     .footer a:hover {
@@ -180,7 +180,7 @@ def main():
     st.markdown("""
         <div class="footer">
             Developed by <b>Khushali Desai</b> | 
-            <a href="https://linkedin.com/in/khushali-desai" target="_blank">LinkedIn</a> | 
+            <a href="https://www.linkedin.com/in/khushali-desai-2b1ab2282/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BdeTUIw7%2BSmyhZri6zSskrw%3D%3D" target="_blank">LinkedIn</a> | 
             <a href="https://github.com/khushalidesai" target="_blank">GitHub</a>
         </div>
         """, unsafe_allow_html=True)

@@ -1,8 +1,8 @@
-# InsightScraper Pro 🔍
+# InsightScraper Pro
 
 **InsightScraper Pro** is a professional-grade, minimalistic web scraping tool designed for precision data extraction. Developed as part of a Python Development Internship, this tool provides a seamless interface for extracting structured data from any website without requiring complex coding.
 
-## 🚀 Features
+## Features
 
 - **Dual Extraction Modes**:
     - **Common Elements**: Instantly extract Titles, Links, and Images.
@@ -13,7 +13,7 @@
 - **Minimalistic UI**: A clean, distraction-free interface designed for productivity, avoiding heavy colors and emojis.
 - **Robust Error Handling**: Real-time feedback on connection status and data availability.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Python**: Core programming language.
 - **Streamlit**: Web interface and interactive components.
@@ -21,7 +21,7 @@
 - **Pandas**: Data manipulation and export processing.
 - **Requests**: HTTP handling for website fetching.
 
-## 📥 Installation
+## Installation
 
 1. **Clone the repository**:
    ```bash
@@ -39,7 +39,7 @@
    py -m streamlit run app.py
    ```
 
-## 📖 Usage Examples
+## Usage Examples
 
 ### Scraping a Bookstore (Multiple Columns)
 - **URL**: `https://books.toscrape.com`
@@ -52,9 +52,9 @@
 - **Mode**: Common Elements
 - **Result**: All news titles and direct links extracted instantly.
 
-## 👤 Developer
+## Developer
 **Khushali Desai**
-- [LinkedIn](https://linkedin.com/in/khushali-desai)
+- [LinkedIn](https://www.linkedin.com/in/khushali-desai-2b1ab2282/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BdeTUIw7%2BSmyhZri6zSskrw%3D%3D)
 - [GitHub](https://github.com/khushalidesai)
 
 ---
