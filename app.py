@@ -5,7 +5,7 @@ import io
 
 # Page configuration
 st.set_page_config(
-    page_title="Professional Web Scraper",
+    page_title="InsightScraper Pro",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -34,15 +34,40 @@ st.markdown("""
     h1 {
         color: #2c3e50;
         font-weight: 700;
+        margin-bottom: 0px;
     }
     .stAlert {
         border-radius: 10px;
+    }
+    /* Footer Style */
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #ffffff;
+        color: #2c3e50;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        border-top: 1px solid #e0e0e0;
+        z-index: 1000;
+    }
+    .footer a {
+        color: #4a90e2;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 600;
+    }
+    .footer a:hover {
+        text-decoration: underline;
     }
     </style>
     """, unsafe_allow_html=True)
 
 def main():
-    st.title("Advanced Web Scraper")
+    st.title("InsightScraper Pro")
+    st.caption("Precision Data Extraction Tool")
     st.markdown("---")
 
     # Sidebar for configuration
@@ -54,7 +79,8 @@ def main():
         mode = st.radio("Choose Mode", ["Common Elements", "Custom CSS Selector"])
         
         if mode == "Custom CSS Selector":
-            selector = st.text_input("CSS Selector", placeholder="h1.title or .price")
+            st.info("Tip: Enter multiple selectors separated by commas for multiple columns (e.g., h3 a, .price_color)")
+            selector = st.text_input("CSS Selector(s)", placeholder="e.g., h3 a, .price_color")
             attribute = st.text_input("Attribute (optional)", placeholder="e.g., href, src")
         
         st.markdown("---")
@@ -68,27 +94,45 @@ def main():
     scraper = WebScraper(url)
     
     if st.sidebar.button("Fetch & Scrape"):
-        with st.spinner("Fetching content..."):
+        with st.spinner("Analyzing site architecture..."):
             if scraper.fetch_content():
                 st.success(f"Successfully connected to {url}")
                 
+                # Standout Feature: Metadata Extraction
+                metadata = scraper.get_metadata()
+                with st.expander("Site Insights (Metadata)", expanded=False):
+                    col_m1, col_m2, col_m3 = st.columns(3)
+                    col_m1.markdown(f"**Title:**\n{metadata.get('Page Title')}")
+                    col_m2.markdown(f"**Description:**\n{metadata.get('Description')}")
+                    col_m3.markdown(f"**Keywords:**\n{metadata.get('Keywords')}")
+
                 extracted_data = {}
                 
                 if mode == "Common Elements":
                     extracted_data = scraper.get_common_data()
                 else:
                     if selector:
-                        data = scraper.extract_data(selector, attribute if attribute else None)
-                        extracted_data = {f"Custom ({selector})": data}
+                        # Split by comma for multi-column support
+                        selectors = [s.strip() for s in selector.split(",") if s.strip()]
+                        extracted_data = {}
+                        for s in selectors:
+                            data = scraper.extract_data(s, attribute if attribute else None)
+                            extracted_data[s] = data
                     else:
                         st.error("Please provide a CSS selector.")
                 
                 if extracted_data:
                     df = scraper.to_dataframe(extracted_data)
                     
-                    # Display Results
-                    st.subheader("Extracted Data Preview")
-                    st.dataframe(df, use_container_width=True)
+                    if not df.empty and df.count().sum() > 0:
+                        # Standout Feature: Search/Filter results
+                        st.subheader("Extracted Data Preview")
+                        search_term = st.text_input("Filter results by text", placeholder="Type to search in the table...")
+                        
+                        if search_term:
+                            df = df[df.apply(lambda row: row.astype(str).str.contains(search_term, case=False).any(), axis=1)]
+                        
+                        st.dataframe(df, use_container_width=True)
                     
                     # Standout Feature: Basic Stats
                     st.subheader("Quick Insights")
@@ -131,6 +175,15 @@ def main():
 
             else:
                 st.error("Failed to fetch the website. Please check the URL or try another site.")
+
+    # Professional Footer
+    st.markdown("""
+        <div class="footer">
+            Developed by <b>Khushali Desai</b> | 
+            <a href="https://linkedin.com/in/khushali-desai" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com/khushalidesai" target="_blank">GitHub</a>
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

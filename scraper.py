@@ -55,6 +55,20 @@ class WebScraper:
         }
         return data
 
+    def get_metadata(self) -> Dict[str, str]:
+        """Extracts page metadata (title, description, keywords)."""
+        if not self.soup:
+            return {}
+        
+        desc = self.soup.find("meta", attrs={"name": "description"})
+        keywords = self.soup.find("meta", attrs={"name": "keywords"})
+        
+        return {
+            "Page Title": self.soup.title.string if self.soup.title else "No Title Found",
+            "Description": desc["content"] if desc else "No Description Found",
+            "Keywords": keywords["content"] if keywords else "No Keywords Found"
+        }
+
     def to_dataframe(self, data: Dict[str, List[Any]]) -> pd.DataFrame:
         """Converts extracted data to a DataFrame, handling unequal lengths."""
         # Find the maximum length to pad other lists
