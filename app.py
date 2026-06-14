@@ -181,7 +181,7 @@ def main():
         <div class="footer">
             Developed by <b>Khushali Desai</b> | 
             <a href="https://www.linkedin.com/in/khushali-desai-2b1ab2282/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BdeTUIw7%2BSmyhZri6zSskrw%3D%3D" target="_blank">LinkedIn</a> | 
-            <a href="https://github.com/khushalidesai" target="_blank">GitHub</a>
+            <a href="https://github.com/kd-debug" target="_blank">GitHub</a>
         </div>
         """, unsafe_allow_html=True)
 
